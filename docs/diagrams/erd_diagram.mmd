@@ -1,0 +1,98 @@
+erDiagram
+  USER ||--o| STUDENT : "student profile"
+  USER ||--o| ADMIN : "admin profile"
+  USER ||--o| STAFF : "staff profile"
+  USER ||--o| VENDOR : "vendor account"
+  STUDENT ||--o{ ORDER : places
+  VENDOR ||--o{ MENU_ITEM : manages
+  VENDOR ||--o{ TIME_SLOT : defines
+  VENDOR ||--o{ ORDER : fulfills
+  ORDER ||--|{ ORDER_ITEM : contains
+  MENU_ITEM ||--o{ ORDER_ITEM : referenced_by
+  ORDER ||--|| PAYMENT : settles
+  ORDER ||--o| QUEUE_TICKET : assigned
+  ORDER ||--o| REVIEW : receives
+  STUDENT ||--o{ REVIEW : submits
+  VENDOR ||--o{ REVIEW : rated_by
+
+  USER {
+    string id PK
+    string name
+    string email UK
+    string password_hash
+    string role
+    string status
+  }
+  STUDENT {
+    string user_id PK
+    string student_no UK
+    string faculty
+    string department
+  }
+  VENDOR {
+    string id PK
+    string user_id FK
+    string outlet_name
+    string operating_hours
+    float avg_rating
+  }
+  ADMIN {
+    string user_id PK
+    string admin_level
+    string department
+  }
+  STAFF {
+    string user_id PK
+    string assigned_outlet
+    string permissions
+  }
+  MENU_ITEM {
+    string id PK
+    string vendor_id FK
+    string name
+    float price
+    int stock
+    boolean is_available
+  }
+  ORDER {
+    string id PK
+    string student_id FK
+    string vendor_id FK
+    string status
+    float total_price
+    datetime scheduled_pickup_time
+  }
+  ORDER_ITEM {
+    string id PK
+    string order_id FK
+    string menu_item_id FK
+    int quantity
+    float subtotal
+  }
+  PAYMENT {
+    string id PK
+    string order_id FK
+    string method
+    string status
+    string transaction_ref
+  }
+  QUEUE_TICKET {
+    string id PK
+    string order_id FK
+    string queue_number
+    int estimated_wait
+    string status
+  }
+  REVIEW {
+    string id PK
+    string order_id FK
+    int rating
+    string comment
+  }
+  TIME_SLOT {
+    string id PK
+    string vendor_id FK
+    datetime start_time
+    datetime end_time
+    int capacity
+  }

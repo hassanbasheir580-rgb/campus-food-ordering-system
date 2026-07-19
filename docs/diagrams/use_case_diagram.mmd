@@ -1,0 +1,15 @@
+flowchart LR
+  Student[Student]:::actor --> StudentUC["Email / Password Login<br/>Student Self-Registration<br/>Browse Menu<br/>Add to Cart<br/>Schedule Order<br/>Make Mock Payment<br/>Track Order and Queue<br/>Submit Review"]:::usecase
+  Vendor[Vendor]:::actor --> VendorUC["Login with Admin-Created Account<br/>Manage Menu and Inventory<br/>Accept / Reject Orders<br/>Update Order Status<br/>View Sales Analytics"]:::usecase
+  Admin[Admin]:::actor --> AdminUC["Create Vendor and Staff Accounts<br/>Activate / Suspend Accounts<br/>Configure System<br/>View and Export Reports"]:::usecase
+  Staff[Staff]:::actor --> StaffUC["Login with Admin-Created Account<br/>Call Ready Queue Number<br/>Confirm Pickup / Delivery<br/>Update Order Status"]:::usecase
+
+  StudentUC -. creates paid order .-> VendorUC
+  VendorUC -. ready queue ticket .-> StaffUC
+  StaffUC -. completed order .-> StudentUC
+  AdminUC -. system settings and reports .-> StudentUC
+  AdminUC -. account control .-> VendorUC
+  AdminUC -. account control .-> StaffUC
+
+  classDef actor fill:#e6f4ef,stroke:#0f766e,stroke-width:2px,color:#0f172a;
+  classDef usecase fill:#ffffff,stroke:#2563eb,stroke-width:2px,color:#172026;

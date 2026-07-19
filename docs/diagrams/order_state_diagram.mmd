@@ -1,0 +1,15 @@
+stateDiagram-v2
+  [*] --> Pending: student submits checkout
+  Pending --> Confirmed: mock payment paid
+  Pending --> Cancelled: mock payment failed
+  Confirmed --> Preparing: vendor accepts order
+  Confirmed --> Rejected: vendor rejects order
+  Preparing --> Ready: vendor marks ready
+  Ready --> Called: staff calls queue number
+  Called --> Completed: staff confirms pickup
+  Confirmed --> Cancelled: allowed cancellation
+  Preparing --> Cancelled: operational cancellation
+  Completed --> Reviewed: student submits review
+  Reviewed --> [*]
+  Cancelled --> [*]
+  Rejected --> [*]

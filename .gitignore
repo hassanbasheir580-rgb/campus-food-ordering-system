@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.env
+.env.local
+backend/data/*.sqlite
+backend/data/*.sqlite-*
+docs/rendered/
+docs/generated/*.tmp
+coverage/
+.DS_Store
+Thumbs.db

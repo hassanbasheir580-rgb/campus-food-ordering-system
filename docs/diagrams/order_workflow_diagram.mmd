@@ -1,0 +1,21 @@
+flowchart TD
+  Start([Student logs in]) --> Browse[Browse vendor menu]
+  Browse --> Cart[Add available items to cart]
+  Cart --> Schedule{Schedule pickup?}
+  Schedule -->|Yes| Slot[Select time slot]
+  Schedule -->|No| Checkout[Proceed to checkout]
+  Slot --> Checkout
+  Checkout --> Payment[Run configurable mock payment]
+  Payment -->|Failed| Fail[Create failed payment and cancelled order without queue ticket]
+  Payment -->|Paid| Create[Create order, payment, and queue ticket]
+  Create --> VendorQueue[Vendor sees order in live queue]
+  VendorQueue --> Decision{Vendor decision}
+  Decision -->|Reject| Rejected[Order rejected and queue cancelled]
+  Decision -->|Accept| Preparing[Order preparing]
+  Preparing --> Ready[Vendor marks ready]
+  Ready --> PublicReady[Public queue display can show ready ticket]
+  PublicReady --> StaffCall[Staff calls queue number]
+  StaffCall --> Pickup[Staff confirms pickup or delivery]
+  Pickup --> Complete[Order completed]
+  Complete --> Review[Student submits review]
+  Review --> End([Lifecycle complete])

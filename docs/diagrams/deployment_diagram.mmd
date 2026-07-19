@@ -1,0 +1,31 @@
+flowchart LR
+  StudentDevice[Student browser or mobile] -->|HTTPS / local demo HTTP| Frontend[Vite React frontend]
+  VendorDevice[Vendor browser] --> Frontend
+  AdminDevice[Admin browser] --> Frontend
+  StaffDevice[Staff queue screen] --> Frontend
+  Frontend -->|REST API| Backend[Node.js Express API]
+  Frontend <-->|WebSocket queue updates| Backend
+  Backend --> SQLite[(SQLite local demo database)]
+  Backend --> Env[Environment variables]
+  Backend --> Seed[Seed and migration scripts]
+  Backend --> Reports[CSV report export]
+
+  subgraph LocalDemo[Local Prototype Deployment]
+    Frontend
+    Backend
+    SQLite
+  end
+
+  subgraph FutureCloud[Future Cloud Deployment from SDS]
+    LoadBalancer[AWS Elastic Load Balancer]
+    AppServer[Auto-scaled application server]
+    RDS[(Managed relational database)]
+    ObjectStore[S3 menu assets]
+    Notification[Notification service]
+  end
+
+  Backend -. production path .-> LoadBalancer
+  LoadBalancer -.-> AppServer
+  AppServer -.-> RDS
+  AppServer -.-> ObjectStore
+  AppServer -.-> Notification

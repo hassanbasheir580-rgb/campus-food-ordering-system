@@ -1,0 +1,27 @@
+{
+  "name": "campus-food-ordering-system",
+  "version": "3.0.0",
+  "private": true,
+  "description": "Campus Food Ordering and Management System prototype for SE Part III.",
+  "workspaces": [
+    "backend",
+    "frontend"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm --workspace backend run dev\" \"npm --workspace frontend run dev\"",
+    "build": "npm --workspace backend run build && npm --workspace frontend run build",
+    "seed": "npm --workspace backend run seed",
+    "test": "npm --workspace backend run test && npm --workspace frontend run test",
+    "start": "npm --workspace backend run start",
+    "docs": "python scripts/build_part_iii_docs.py"
+  },
+  "overrides": {
+    "ws": "$ws"
+  },
+  "devDependencies": {
+    "concurrently": "^10.0.3",
+    "mermaid": "^11.15.0",
+    "playwright": "^1.61.0",
+    "ws": "^8.21.0"
+  }
+}

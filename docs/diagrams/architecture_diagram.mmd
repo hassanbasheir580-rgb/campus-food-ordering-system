@@ -1,0 +1,43 @@
+flowchart TB
+  subgraph Presentation[Presentation Tier]
+    React[React + Vite + TypeScript SPA]
+    StudentUI[Student top navigation]
+    OpsUI[Vendor/Admin/Staff sidebar dashboards]
+  end
+
+  subgraph Application[Application Tier - Node.js + Express + TypeScript]
+    Auth[AuthController and RBAC middleware]
+    Menu[Menu and Inventory Routes]
+    Orders[Order Service]
+    Payments[Mock Payment Service]
+    Queue[Queue Service + Public Display API + WebSocket Events]
+    Analytics[Analytics and Reports Service]
+    Admin[Admin Configuration Service]
+  end
+
+  subgraph Data[Data Tier - SQLite]
+    DB[(SQLite database)]
+    Seed[Seed data and migrations]
+    Config[System settings table]
+  end
+
+  React --> StudentUI
+  React --> OpsUI
+  StudentUI --> Auth
+  StudentUI --> Menu
+  StudentUI --> Orders
+  StudentUI --> Queue
+  OpsUI --> Menu
+  OpsUI --> Orders
+  OpsUI --> Queue
+  OpsUI --> Analytics
+  OpsUI --> Admin
+  Orders --> Payments
+  Orders --> Queue
+  Auth --> DB
+  Menu --> DB
+  Orders --> DB
+  Queue --> DB
+  Analytics --> DB
+  Admin --> Config
+  Seed --> DB
