@@ -7,8 +7,8 @@ const numberFromEnv = (value: string | undefined, fallback: number) => {
 
 export const appConfig = {
   appName: import.meta.env.VITE_APP_NAME ?? 'Campus Food Ordering',
-  apiUrl: import.meta.env.VITE_API_URL ?? 'http://localhost:4000/api',
-  socketUrl: import.meta.env.VITE_SOCKET_URL ?? 'http://localhost:4000',
+apiUrl: import.meta.env.VITE_API_URL ?? 'https://campus-food-ordering-system-wsra.onrender.com/api',
+socketUrl: import.meta.env.VITE_SOCKET_URL ?? 'https://campus-food-ordering-system-wsra.onrender.com',
   queueRefreshMs: numberFromEnv(import.meta.env.VITE_QUEUE_REFRESH_MS, 8000),
   currency: 'RM',
   featureFlags: {
