@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "tsx watch src/server.ts",
     "build": "tsc -p tsconfig.json",
-    "start": "node dist/server.js",
+    "start": "npm run seed && node dist/server.js",
     "seed": "tsx src/database/seed.ts",
     "test": "tsx src/database/seed.ts && tsx src/tests/smoke.test.ts"
   },
